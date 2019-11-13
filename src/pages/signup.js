@@ -20,7 +20,7 @@ function newUser() {
                 biography: 'Fale de você, seus gostos, plantas favoritas, etc.',
               })
                 .then(() => {
-                  window.location = '#login';
+                  window.location = '#feed';
                 });
             });
         }

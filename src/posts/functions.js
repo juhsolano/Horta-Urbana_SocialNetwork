@@ -162,7 +162,8 @@ async function LikePost(postId) {
   });
 }
 
-function DeletePost(postId) {
+function DeletePost(event) {
+  const postId = event.target.dataset.id;
   if (!confirm('Tem certeza que deseja excluir essa publicação?')) return;
   window.db
     .collection('posts')
