@@ -4,8 +4,8 @@
 
 .profile-btn,
 .logout-btn {
-  background-color: #322F20;
-  border: 1px solid #322F20;
+  background-color: #09A603;
+  border: 1px solid #09A603;
   color: #FCFCFC;
   width: auto !important;
 }
@@ -37,13 +37,14 @@
 .register-text {
   text-align: center;
   text-align: justify;
+  font-size: 18px;
   margin: auto;
   padding: 1% 2% 2% 2%;
 }
 
 .header {
   width: 100vw;
-  background-color: #322F20;
+  background-color: #09A603;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,11 +56,11 @@
   align-items: center;
   color: #FCFCFC;
   font-size: 15px;
-  font-weight: 50px;
+  font-weight: bold;
 }
 
 .side-menu {
-  background-color: #322F20;
+  background-color: #09A603;
   display: flex !important;
   flex-direction: column;
   position: fixed;
@@ -78,10 +79,6 @@
 
 .header-img {
   width: 50px;
-}
-
-.header-img img {
-  width: 100%;
 }
 
 .post-area-container {
@@ -162,14 +159,14 @@
 }
 
 .post {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   background-color: #ffffff;
   border-radius: 10px;
   position: relative;
 }
 
 .post-text {
-  font-size: 20px;
+  font-size: 15px;
   word-wrap: break-word;
   padding: 20px 10px 10px 10px;
   min-height: 70px;
@@ -181,6 +178,7 @@
 .username {
   font-size: 15px;
   margin-left: 10px;
+  padding: 2.5% 1.5% 0.5%;
 }
 
 .date {
@@ -188,6 +186,7 @@
   border-bottom: 1px solid #929090;
   margin-left: 10px;
   margin-right: 10px;
+  padding: 0.5% 1.5% 0.5% 1.5%
 }
 
 .post-list {
@@ -203,7 +202,7 @@
 }
 
 .delete:hover {
-  color: rgb(143, 9, 9) !important;
+  color: #0487D9 !important;
   cursor: pointer;
 }
 
@@ -215,12 +214,12 @@
 }
 
 .edit-post:hover {
-  color: rgb(76, 119, 13) !important;
+  color: #0487D9 !important;
   cursor: pointer;
 }
 
 .comment-icon:hover {
-  color: rgb(118, 169, 214);
+  color: #0487D9;
 }
 
 .interaction-area {
@@ -287,7 +286,6 @@
   border-bottom: hidden;
 }
 
-
 .letterIcon {
   width: 40px;
   display: flex;
@@ -299,7 +297,7 @@
   background-color: rgba(49, 46, 31, 0.096);
   border-radius: 100%;
   flex-shrink: 0;
-  color: #322F20;
+  color: #09A603;
 }
 
 .comment-area {

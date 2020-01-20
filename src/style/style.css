@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 @import url(auth.css);
 @import url(feed.css);
 @import url(profile.css);
@@ -10,9 +11,9 @@
 }
 
 body {
-  font-family: 'Quicksand', sans-serif;
-  color: #04151F;
-  background-color: #c6e2ac;
+  font-family: 'Roboto', sans-serif;
+  color: #A6033F;
+  background-color: #012340;
   min-height: 100vh;
   width: 100%;
   max-width: 100%;
@@ -20,26 +21,27 @@ body {
 }
 
 .btn {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: bold;
   text-align: center;
   padding: 0.5em;
   margin: 1em;
-  width: 80px;
+  width: 120px;
+  height: 50px;
   border-radius: 100px;
   cursor: pointer;
 }
 
 .btn-gray {
-  background-color: #322F20;
+  background-color: #09A603;
   color: #FCFCFC;
-  border: 2px solid #322F20;
+  border: 2px solid #09A603;
   transition: all .15s linear;
 }
 
 .btn-gray:hover {
   background-color: transparent;
-  color: #322F20;
-  border: 2px solid #322F20;
+  color: #09A603;
+  border: 2px solid #09A603;
   transition: all .15s linear;
 }

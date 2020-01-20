@@ -39,6 +39,7 @@
 }
 
 .text-bio {
+  font-size: 10px;
   margin: 5px;
   padding: 3px;
 }
@@ -65,7 +66,6 @@
   .user-profile {
     max-width: 650px;
   }
-
   .user-bio {
     max-width: 300px;
   }

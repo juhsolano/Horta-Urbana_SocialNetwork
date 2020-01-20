@@ -47,7 +47,7 @@ function Login() {
   ${Input({
     type: 'email',
     class: 'email-input',
-    placeholder: 'Email',
+    placeholder: 'E-mail',
     value: '',
   })}
   ${Input({
@@ -60,7 +60,7 @@ function Login() {
     class: 'btn btn-gray',
     id: 'btn-log-in',
     onclick: loginRegisteredUser,
-    title: 'Entrar',
+    title: 'ENTRAR',
   })}
   ${Button({
     id: 'authGoogleButton',
@@ -73,11 +73,11 @@ function Login() {
   <article class='login-page'>
   <img class='login-img' src="./img/logo.png">
   <form class="form-content-login">
-    <h1>Horta Urbana</h1> 
+    <h1 class="horta-urbana">HORTA URBANA</h1> 
     ${userLogin}
     <div id="errorMessage" class="error-message"></div>
-    <p>Ainda não é membro? 
-      <a href="#signup">Cadastre-se!</a>
+    <p>AINDA NÃO É MEMBRO? 
+      <a href="#signup">CADASTRE-SE!</a>
     </p> 
   </form>
   </article>

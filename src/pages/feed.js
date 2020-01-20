@@ -1,4 +1,5 @@
 import Button from '../components/button.js';
+import Icons from '../components/icons.js';
 import Textarea from '../components/textarea.js';
 import {
   AddComment,
@@ -43,32 +44,47 @@ function printComments(arr, logged) {
 function addPost(post, postId) {
   const imageTemplate = `<img class='preview-picture' src='${post.image_url}'>`;
   const LoggedUserID = window.auth.currentUser.uid;
-  const selectTemplate = `<select class="privacy"><option value="public" ${post.privacy === 'public' ? 'selected' : ''}>Público</option><option value="private" ${post.privacy === 'private' ? 'selected' : ''}> Privado</option></select>`;
+  const selectTemplate = `<select class="privacy"><option value="public" ${post.privacy === 'public' ? 'selected' : ''}>PÚBLICO</option><option value="private" ${post.privacy === 'private' ? 'selected' : ''}> PRIVADO</option></select>`;
   const postTemplate = `
       <li class='post' id = "${postId}">
         <p class='username'>Postado por <strong><span id='${post.user_id}'>${post.user_name}</span></strong></p> 
         <p class='date'>${post.createdAt.toDate().toLocaleString('pt-BR').substr(0, 19)}</p>
         <p class="post-text">${post.text}</p>
         ${post.image_url ? imageTemplate : ''}
-        ${LoggedUserID === post.user_id ? '<div class="delete fa fa-trash"></div> <div><span class="edit-post fa fa-pencil"></span></div>' : ''}
-        <div class="edit-button"></div>
-        <div class="post-footer">
-          <div class="interaction-area">
-            <div>
-              <div class="like fa fa-heart"></div>
-              ${post.likes}
-            </div>
-            <div class='comment-icon fa fa-comments'></div>
-            ${LoggedUserID === post.user_id ? selectTemplate : ''}
+        ${LoggedUserID === post.user_id ? `<div>
+           ${window.icons.component({
+    class: 'delete fa fa-trash',
+    dataId: postId,
+    onclick: DeletePost,
+  })}
+    </div>
+      <div>
+        <span>
+        ${window.icons.component({
+    class: 'edit-post fa fa-pencil',
+    dataId: postId,
+    onclick: EditPost,
+  })} 
+  </span>
+      </div>` : ''}
+      <div class="edit-button"></div>
+      <div class="post-footer">
+        <div class="interaction-area">
+          <div>
+            <div class="like fa fa-heart"></div>
+            ${post.likes}
           </div>
-          <div class='comments'>
-            <div class='comment-container'></div>
-            ${post.comments.length > 0 ? '<p><strong>Comentários:</strong></p>' : ''}
-            <ul class='comment-posts'>${printComments(post.comments, LoggedUserID)}</ul>
-          </div>
+          <div class='comment-icon fa fa-comments'></div>
+          ${LoggedUserID === post.user_id ? selectTemplate : ''}
         </div>
-      </li>
-      `;
+        <div class='comments'>
+          <div class='comment-container'></div>
+          ${post.comments.length > 0 ? '<p><strong>Comentários:</strong></p>' : ''}
+          <ul class='comment-posts'>${printComments(post.comments, LoggedUserID)}</ul>
+        </div>
+      </div>
+      </li >
+    `;
   return postTemplate;
 }
 
@@ -107,31 +123,33 @@ function createPost() {
 
 function NewPostTemplate() {
   const postArea = `
-  ${Textarea({
-    class: 'text-area',
-    id: 'post-text',
-    placeholder: 'No que você está pensando?',
-    value: '',
-  })}
+  ${
+    Textarea({
+      class: 'text-area',
+      id: 'post-text',
+      placeholder: 'No que você está pensando?',
+      value: '',
+    })
+    }
   <div class='footer-post'>
-    <div class = 'action'>
+    <div class='action'>
       <label for='input-photo' class='fa fa-image'></label>
       <div class="image-preview-container" id='image-preview-container'></div>
       <input type='file' class='input-photo' id='input-photo'>
-      ${Button({
-    type: 'button',
-    class: 'btn btn-gray btn-post',
-    id: 'btn-post',
-    onclick: createPost,
-    title: 'Postar',
-  })}
+        ${Button({
+      type: 'button',
+      class: 'btn btn-gray btn-post',
+      id: 'btn-post',
+      onclick: createPost,
+      title: 'POSTAR',
+    })}
 </div>
-<div class='surpriseUsers' id='surpriseUsers'>
-  <progress style='display:none;' value='0' max='100' id='uploader' class='upload-bar'>0%</progress>
-  <div id='messageImage'></div>
-</div>
-</div>
-`;
+      <div class='surpriseUsers' id='surpriseUsers'>
+        <progress style='display:none;' value='0' max='100' id='uploader' class='upload-bar'>0%</progress>
+        <div id='messageImage'></div>
+      </div>
+    </div>
+    `;
   const template = `
   <div class='post-area-container'
   <section class="input-area">
@@ -139,10 +157,12 @@ function NewPostTemplate() {
       ${postArea}
     </form>
   </section>
-  </div>
-`;
+  </div >
+    `;
   return template;
 }
+
+//Esta função precisa mudar
 
 function checkIsProfile(profileValue, feedValue) {
   return window.location.hash === '#profile' ? profileValue : feedValue;
@@ -161,11 +181,11 @@ function loadPosts() {
       snapshot.docs.forEach((post) => {
         postList.innerHTML += addPost(post.data(), post.id);
       });
-      document.querySelectorAll('.delete').forEach((btn) => {
-        btn.addEventListener('click', (event) => {
-          DeletePost(event.target.parentNode.getAttribute('id'));
-        });
-      });
+      // document.querySelectorAll('.delete').forEach((btn) => {
+      //   btn.addEventListener('click', (event) => {
+      //     DeletePost(event.target.parentNode.getAttribute('id'));
+      //   });
+      // });
       document.querySelectorAll('.delete-comment').forEach((btn) => {
         btn.addEventListener('click', (event) => {
           DeleteComment(event.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id'));
@@ -176,11 +196,11 @@ function loadPosts() {
           LikePost(event.target.parentNode.parentNode.parentNode.parentNode.getAttribute('id'));
         });
       });
-      document.querySelectorAll('.edit-post').forEach((btn) => {
-        btn.addEventListener('click', (event) => {
-          EditPost(event.target.parentNode.parentNode.getAttribute('id'));
-        });
-      });
+      // document.querySelectorAll('.edit-post').forEach((btn) => {
+      //   btn.addEventListener('click', (event) => {
+      //     EditPost(event.target.parentNode.parentNode.getAttribute('id'));
+      //   });
+      // });
       document.querySelectorAll('.comment-icon').forEach((icon) => {
         icon.addEventListener('click', (event) => {
           AddComment(event.target.parentNode.parentNode.parentNode.getAttribute('id'));
@@ -198,73 +218,74 @@ function loadPosts() {
 function userDescription() {
   if (checkIsProfile(false, true)) return '';
   const template = `
-  <div class='bio-container'>
-  <section class='user-profile'>
+    <div class='bio-container'>
+      <section class='user-profile'>
         <div class='profile-name'>
-        ${UserInfo()}
+          ${UserInfo()}
         </div>
         <section class='user-bio'>
           ${AddBio()}
         </section>
         ${CreateBio()}
         <div class='edit-button'></div>
-  </section>
-  </div>
-      `;
+      </section>
+  </div >
+    `;
   return template;
 }
 
 function Feed() {
-  const nameBtn = checkIsProfile('Feed', 'Meu Perfil');
+  const nameBtn = checkIsProfile('FEED', 'MEU PERFIL');
   const template = `
-  <header class='header'>
-    ${Button({
-    type: 'button',
-    class: 'btn profile-btn hide-mobile',
-    id: 'btn-profile',
-    onclick: () => {
-      window.location = window.location.hash === '#profile' ? '#feed' : '#profile';
-    },
-    title: nameBtn,
-  })}
-    <div class='header-title'>
-      <label for='toggle-side-menu'>
-        <div class='fa fa-bars hide-desktop menu-icon'></div>
-      </label>
-      <p> Horta Urbana </p> 
-      <div class='header-img'>
-        <img src="./img/fruits.svg">
+    <header class='header'>
+      ${
+    Button({
+      type: 'button',
+      class: 'btn profile-btn hide-mobile',
+      id: 'btn-profile',
+      onclick: () => {
+        window.location = window.location.hash === '#profile' ? '#feed' : '#profile';
+      },
+      title: nameBtn,
+    })
+    }
+  <div class='header-title'>
+    <label for='toggle-side-menu'>
+      <div class='fa fa-bars hide-desktop menu-icon'></div>
+    </label>
+    <p> HORTA URBANA </p>
+    <div class='header-img'>
       </div>
     </div>
     ${Button({
-    type: 'button',
-    class: 'btn logout-btn hide-mobile',
-    id: 'btn-log-out',
-    onclick: logOut,
-    title: 'Sair',
-  })}
-    <input 
+      type: 'button',
+      class: 'btn logout-btn hide-mobile',
+      id: 'btn-log-out',
+      onclick: logOut,
+      title: 'SAIR',
+    })}
+    <input
       type='checkbox'
-      id='toggle-side-menu' 
+      id='toggle-side-menu'
       class='toggle-side-menu hide-desktop'
     />
     <div class='side-menu hide-desktop'>
-        ${Button({
-    type: 'button',
-    class: 'btn profile-btn ',
-    id: 'btn-profile',
-    onclick: () => {
-      window.location = window.location.hash === '#profile' ? '#feed' : '#profile';
-    },
-    title: nameBtn,
-  })}
-  ${Button({
-    type: 'button',
-    class: 'btn logout-btn ',
-    id: 'btn-log-out',
-    onclick: logOut,
-    title: 'Sair',
-  })}
+      ${Button({
+      type: 'button',
+      class: 'btn profile-btn ',
+      id: 'btn-profile',
+      onclick: () => {
+        window.location = window.location.hash === '#profile' ? '#feed' : '#profile';
+      },
+      title: nameBtn,
+    })}
+      ${Button({
+      type: 'button',
+      class: 'btn logout-btn ',
+      id: 'btn-log-out',
+      onclick: logOut,
+      title: 'SAIR',
+    })}
     </div>
   </header>
   ${userDescription()}
