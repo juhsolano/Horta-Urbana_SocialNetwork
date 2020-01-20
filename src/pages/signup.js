@@ -49,7 +49,7 @@ function Signup() {
     ${Input({
     type: 'email',
     class: 'email-input',
-    placeholder: 'Email',
+    placeholder: 'E-mail',
     value: '',
   })}
     ${Input({
@@ -62,15 +62,15 @@ function Signup() {
     class: 'btn btn-register btn-gray',
     id: 'btn-new-user',
     onclick: newUser,
-    title: 'Cadastrar',
+    title: 'CADASTRAR',
   })}
   `;
   const template = `
     <header class="main-header">
-      <h1>Bem vindo(a)!</h1>
+      <h1 class="welcome">BEM VINDO(A)!</h1>
     </header>
     <form class="form-content-signup">
-    <img class='signup-img' src="./img/woman.png">
+    <img class='signup-img' src="./img/logo.png">
       <main class="register-input">
         <p class="register-text">Para realizar o cadastro, preencha as informações abaixo:</p>
         ${userInfo}

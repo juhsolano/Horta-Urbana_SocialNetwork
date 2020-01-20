@@ -44,15 +44,29 @@ function printComments(arr, logged) {
 function addPost(post, postId) {
   const imageTemplate = `<img class='preview-picture' src='${post.image_url}'>`;
   const LoggedUserID = window.auth.currentUser.uid;
-  const selectTemplate = `<select class="privacy"><option value="public" ${post.privacy === 'public' ? 'selected' : ''}>Público</option><option value="private" ${post.privacy === 'private' ? 'selected' : ''}> Privado</option></select>`;
+  const selectTemplate = `<select class="privacy"><option value="public" ${post.privacy === 'public' ? 'selected' : ''}>PÚBLICO</option><option value="private" ${post.privacy === 'private' ? 'selected' : ''}> PRIVADO</option></select>`;
   const postTemplate = `
       <li class='post' id = "${postId}">
         <p class='username'>Postado por <strong><span id='${post.user_id}'>${post.user_name}</span></strong></p> 
         <p class='date'>${post.createdAt.toDate().toLocaleString('pt-BR').substr(0, 19)}</p>
         <p class="post-text">${post.text}</p>
         ${post.image_url ? imageTemplate : ''}
-        ${ LoggedUserID === post.user_id ? '<div class="delete fa fa-trash"></div> <div><span class="edit-post fa fa-pencil"></span></div>' : ''}
-        ${LoggedUserID === post.user_id ? window.icons.component({ title: 'excluir', dataId: postId, onclick: DeletePost }) : ''}
+        ${LoggedUserID === post.user_id ? `<div>
+           ${window.icons.component({
+    class: 'delete fa fa-trash',
+    dataId: postId,
+    onclick: DeletePost,
+  })}
+    </div>
+      <div>
+        <span>
+        ${window.icons.component({
+    class: 'edit-post fa fa-pencil',
+    dataId: postId,
+    onclick: EditPost,
+  })} 
+  </span>
+      </div>` : ''}
       <div class="edit-button"></div>
       <div class="post-footer">
         <div class="interaction-area">
@@ -127,7 +141,7 @@ function NewPostTemplate() {
       class: 'btn btn-gray btn-post',
       id: 'btn-post',
       onclick: createPost,
-      title: 'Postar',
+      title: 'POSTAR',
     })}
 </div>
       <div class='surpriseUsers' id='surpriseUsers'>
@@ -147,6 +161,8 @@ function NewPostTemplate() {
     `;
   return template;
 }
+
+//Esta função precisa mudar
 
 function checkIsProfile(profileValue, feedValue) {
   return window.location.hash === '#profile' ? profileValue : feedValue;
@@ -180,11 +196,11 @@ function loadPosts() {
           LikePost(event.target.parentNode.parentNode.parentNode.parentNode.getAttribute('id'));
         });
       });
-      document.querySelectorAll('.edit-post').forEach((btn) => {
-        btn.addEventListener('click', (event) => {
-          EditPost(event.target.parentNode.parentNode.getAttribute('id'));
-        });
-      });
+      // document.querySelectorAll('.edit-post').forEach((btn) => {
+      //   btn.addEventListener('click', (event) => {
+      //     EditPost(event.target.parentNode.parentNode.getAttribute('id'));
+      //   });
+      // });
       document.querySelectorAll('.comment-icon').forEach((icon) => {
         icon.addEventListener('click', (event) => {
           AddComment(event.target.parentNode.parentNode.parentNode.getAttribute('id'));
@@ -219,7 +235,7 @@ function userDescription() {
 }
 
 function Feed() {
-  const nameBtn = checkIsProfile('Feed', 'Meu Perfil');
+  const nameBtn = checkIsProfile('FEED', 'MEU PERFIL');
   const template = `
     <header class='header'>
       ${
@@ -237,9 +253,8 @@ function Feed() {
     <label for='toggle-side-menu'>
       <div class='fa fa-bars hide-desktop menu-icon'></div>
     </label>
-    <p> Horta Urbana </p>
+    <p> HORTA URBANA </p>
     <div class='header-img'>
-      <img src="./img/fruits.svg">
       </div>
     </div>
     ${Button({
@@ -247,7 +262,7 @@ function Feed() {
       class: 'btn logout-btn hide-mobile',
       id: 'btn-log-out',
       onclick: logOut,
-      title: 'Sair',
+      title: 'SAIR',
     })}
     <input
       type='checkbox'
@@ -269,12 +284,12 @@ function Feed() {
       class: 'btn logout-btn ',
       id: 'btn-log-out',
       onclick: logOut,
-      title: 'Sair',
+      title: 'SAIR',
     })}
     </div>
   </header>
-  ${ userDescription()}
-  ${ NewPostTemplate()}
+  ${userDescription()}
+  ${NewPostTemplate()}
   <section id="printpost" class="print-post">
     <ul class='post-list'>${loadPosts() || ''}</ul>
   </section>

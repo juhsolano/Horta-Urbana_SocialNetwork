@@ -52,7 +52,6 @@ function editBio() {
     .get()
     .then((doc) => {
       document.querySelector('.user-bio').innerHTML = `
-     
       <form>
       ${window.textarea.component({
         class: 'edit-textarea',
@@ -66,13 +65,13 @@ function editBio() {
         id: 'btn-cancel',
         class: 'btn cancel-btn',
         onclick: window.profile.cancelEditBio,
-        title: 'Cancelar',
+        title: 'CANCELAR',
       })}
   ${window.button.component({
         id: 'btn-save',
         class: 'btn save-btn btn-gray',
         onclick: window.profile.saveEditBio,
-        title: 'Publicar',
+        title: 'PUBLICAR',
       })
         }
       </div>
@@ -88,7 +87,7 @@ function CreateBio() {
     class: 'btn btn-gray btn-post',
     id: 'btn-post',
     onclick: editBio,
-    title: 'Editar biografia',
+    title: 'EDITAR BIOGRAFIA',
   })}
     `;
   return template;

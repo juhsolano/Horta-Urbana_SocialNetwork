@@ -44,7 +44,7 @@ function AddComment(postId) {
     id: 'btn-comment-cancel',
     dataId: postId,
     onclick: cancelComment,
-    title: 'Cancelar',
+    title: 'CANCELAR',
   })}
     ${Button({
     type: 'button',
@@ -52,7 +52,7 @@ function AddComment(postId) {
     id: 'btn-comment-post',
     dataId: postId,
     onclick: saveComment,
-    title: 'Postar',
+    title: 'POSTAR',
   })}
 </div>
 `;
@@ -82,7 +82,7 @@ function PrivacyPost(postId, option) {
   });
 }
 
-function saveEdit() {
+function saveEdit(event) {
   const id = event.target.dataset.id;
   const postText = document.getElementById(id).querySelector('.post-text');
   const buttonPencil = document.getElementById(id).querySelector('.edit-post');
@@ -100,7 +100,7 @@ function saveEdit() {
   buttonPencil.style.display = 'block';
 }
 
-function cancelEdit() {
+function cancelEdit(event) {
   const id = event.target.dataset.id;
   const postText = document.getElementById(id).querySelector('.post-text');
   const buttonPencil = document.getElementById(id).querySelector('.edit-post');
@@ -112,14 +112,16 @@ function cancelEdit() {
   buttonPencil.style.display = 'block';
 }
 
-function EditPost(postId) {
-  const id = postId;
-  const postText = document.getElementById(id).querySelector('.post-text');
-  const button = document.getElementById(id).querySelector('.edit-button');
-  const buttonPencil = document.getElementById(id).querySelector('.edit-post');
+function EditPost(event) {
+  const postId = event.target.dataset.id;
+  console.log(postId);
+  // const id = postId;
+  const postText = document.getElementById(postId).querySelector('.post-text');
+  const button = document.getElementById(postId).querySelector('.edit-button');
+  const buttonPencil = document.getElementById(postId).querySelector('.edit-post');
   const text = postText.textContent;
   postText.innerHTML = `
-  ${Textarea({
+  ${window.textarea.component({
     class: 'edit-textarea',
     id: 'edit-textarea',
     placeholder: '',
@@ -127,19 +129,19 @@ function EditPost(postId) {
   })}
   `;
   button.innerHTML = `
-  ${Button({
+  ${window.button.component({
     id: 'btn-cancel',
     class: 'btn cancel-btn',
     dataId: postId,
-    onclick: cancelEdit,
-    title: 'Cancelar',
+    onclick: window.cancelEdit,
+    title: 'CANCELAR',
   })}
-  ${Button({
+  ${window.button.component({
     id: 'btn-save',
     class: 'btn save-btn btn-gray',
     dataId: postId,
-    onclick: saveEdit,
-    title: 'Salvar',
+    onclick: window.saveEdit,
+    title: 'SALVAR',
   })}
   `;
   buttonPencil.style.display = 'none';
@@ -185,3 +187,6 @@ export {
   DeletePost,
   GetFirstLetter,
 };
+
+window.cancelEdit = cancelEdit;
+window.saveEdit = saveEdit;

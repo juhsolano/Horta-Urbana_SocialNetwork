@@ -3,7 +3,6 @@ import Signup from './pages/signup.js';
 import Feed from './pages/feed.js';
 import Profile from './pages/profile.js';
 
-
 function loadImage() {
   const inputPhoto = document.getElementById('input-photo');
   inputPhoto.addEventListener('change', (e) => {
@@ -13,8 +12,7 @@ function loadImage() {
     task.on('state_changed',
       (snapshot) => {
         document.getElementById('uploader').style.display = 'block';
-        const percentage = (snapshot.bytesTransferred
-          / snapshot.totalBytes) * 100;
+        const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         document.querySelector('.upload-bar').value = percentage;
       },
       () => {
