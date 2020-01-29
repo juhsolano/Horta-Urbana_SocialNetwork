@@ -24,14 +24,15 @@ function logOut() {
     });
 }
 
-function printComments(arr, logged) {
+function printComments(arr, postId, logged) {
+  console.log(arr, logged)
   let template = '';
-  arr.forEach((text) => {
+  arr.map((text) => {
     template += `
     <li class='comments-list' data-userid='${text.id}'  data-ref='${text.idComment}'>
       <div class='letterIcon'>${GetFirstLetter(text.userName)}</div> 
       <div class= 'comment-area'>
-      ${logged === text.id ? '<div class="delete-comment fa fa-trash"></div>' : ''}
+      ${logged === text.id ? `<div class="delete-comment fa fa-trash" onclick="window.DeleteComment('${postId}', '${text.idComment}')"></div>` : ''}
       <div class='user'>${text.userName}:</div>
       <div class='text-comment'>${text.newComment}</div>
       </div>
@@ -40,6 +41,8 @@ function printComments(arr, logged) {
   });
   return template;
 }
+
+
 
 function addPost(post, postId) {
   const imageTemplate = `<img class='preview-picture' src='${post.image_url}'>`;
@@ -80,7 +83,7 @@ function addPost(post, postId) {
         <div class='comments'>
           <div class='comment-container'></div>
           ${post.comments.length > 0 ? '<p><strong>Comentários:</strong></p>' : ''}
-          <ul class='comment-posts'>${printComments(post.comments, LoggedUserID)}</ul>
+          <ul class='comment-posts'>${printComments(post.comments, postId, LoggedUserID)}</ul>
         </div>
       </div>
       </li >
@@ -162,7 +165,7 @@ function NewPostTemplate() {
   return template;
 }
 
-//Esta função precisa mudar
+//Esta função precisa mudar!!!!!!!!!!!!!!!!!
 
 function checkIsProfile(profileValue, feedValue) {
   return window.location.hash === '#profile' ? profileValue : feedValue;
@@ -186,11 +189,11 @@ function loadPosts() {
       //     DeletePost(event.target.parentNode.getAttribute('id'));
       //   });
       // });
-      document.querySelectorAll('.delete-comment').forEach((btn) => {
-        btn.addEventListener('click', (event) => {
-          DeleteComment(event.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id'));
-        });
-      });
+      // document.querySelectorAll('.delete-comment').forEach((btn) => {
+      //   btn.addEventListener('click', (event) => {
+      //     DeleteComment(event.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id'));
+      //   });
+      // });
       document.querySelectorAll('.like').forEach((btn) => {
         btn.addEventListener('click', (event) => {
           LikePost(event.target.parentNode.parentNode.parentNode.parentNode.getAttribute('id'));
