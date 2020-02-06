@@ -78,6 +78,7 @@ As funcionalidades foram designadas com as seguintes demandas do usuário.
 **GIFs demostrativos das funcionalidades**
 
 ![profile](src/img/profile.png)
+
 **Figura 2.** Interface do perfil do usúario.
 
 ***
