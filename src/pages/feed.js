@@ -3,7 +3,6 @@ import Icons from '../components/icons.js';
 import Textarea from '../components/textarea.js';
 import {
   AddComment,
-  DeleteComment,
   PrivacyPost,
   EditPost,
   LikePost,
@@ -25,7 +24,6 @@ function logOut() {
 }
 
 function printComments(arr, postId, logged) {
-  console.log(arr, logged)
   let template = '';
   arr.map((text) => {
     template += `
@@ -41,8 +39,6 @@ function printComments(arr, postId, logged) {
   });
   return template;
 }
-
-
 
 function addPost(post, postId) {
   const imageTemplate = `<img class='preview-picture' src='${post.image_url}'>`;
@@ -165,8 +161,6 @@ function NewPostTemplate() {
   return template;
 }
 
-//Esta função precisa mudar!!!!!!!!!!!!!!!!!
-
 function checkIsProfile(profileValue, feedValue) {
   return window.location.hash === '#profile' ? profileValue : feedValue;
 }
@@ -184,26 +178,11 @@ function loadPosts() {
       snapshot.docs.forEach((post) => {
         postList.innerHTML += addPost(post.data(), post.id);
       });
-      // document.querySelectorAll('.delete').forEach((btn) => {
-      //   btn.addEventListener('click', (event) => {
-      //     DeletePost(event.target.parentNode.getAttribute('id'));
-      //   });
-      // });
-      // document.querySelectorAll('.delete-comment').forEach((btn) => {
-      //   btn.addEventListener('click', (event) => {
-      //     DeleteComment(event.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id'));
-      //   });
-      // });
       document.querySelectorAll('.like').forEach((btn) => {
         btn.addEventListener('click', (event) => {
           LikePost(event.target.parentNode.parentNode.parentNode.parentNode.getAttribute('id'));
         });
       });
-      // document.querySelectorAll('.edit-post').forEach((btn) => {
-      //   btn.addEventListener('click', (event) => {
-      //     EditPost(event.target.parentNode.parentNode.getAttribute('id'));
-      //   });
-      // });
       document.querySelectorAll('.comment-icon').forEach((icon) => {
         icon.addEventListener('click', (event) => {
           AddComment(event.target.parentNode.parentNode.parentNode.getAttribute('id'));
