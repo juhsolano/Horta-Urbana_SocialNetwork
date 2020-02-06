@@ -83,5 +83,3 @@ As funcionalidades foram designadas com as seguintes demandas do usuário.
 ***
 # 3. Informações Adicionais
 Este projeto foi proposto pela Laboratória BR e  desenvolvido em conjunto com as alunas Giovanna Lima, Juanita Solano e Mônica Sousa.
-
-Demonstração da página do Feed:
