@@ -15,10 +15,3 @@ window.icons = {
 };
 
 export default Icons;
-
-// ${LoggedUserID === post.user_id ? window.icons.component({ title: 'excluir', dataId: postId, onclick: DeletePost }) : ''}
-// ${LoggedUserID === post.user_id ? window.icons.component({
-//   class: 'delete fa fa-trash',
-//   dataId: postId,
-//   onclick: DeletePost,
-// }) : ''}
